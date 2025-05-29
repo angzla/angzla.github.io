@@ -4,10 +4,10 @@ function commonSetup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  noCursor();
+  Cursor();
   textFont('Georgia');
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 33; i++) {
     koiFish.push(new KoiFish(random(width), random(height)));
   }
 }

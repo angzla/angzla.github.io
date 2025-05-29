@@ -9,5 +9,4 @@ function setup() {
   
   function mousePressed() {
     attractKoi(mouseX, mouseY);
-  }
-  
+  }  
