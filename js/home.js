@@ -4,7 +4,8 @@ function setup() {
   }
   
   function draw() {
-    background(0, 50);
+    // background(0, 50);
+    background(255, 255, 255, 50);
     updateKoi();
   }
   
