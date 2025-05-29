@@ -5,6 +5,7 @@ function commonSetup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   textFont('Georgia');
+  cursor();
 
   for (let i = 0; i < 33; i++) {
     koiFish.push(new KoiFish(random(width), random(height)));

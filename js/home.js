@@ -1,5 +1,6 @@
 function setup() {
     commonSetup();
+    cursor();
   }
   
   function draw() {

@@ -3,6 +3,7 @@ let flowers = [];
 
 function setup() {
   commonSetup();
+  cursor();
 
   let padLabels = [
     { label: "StarrySwarm", link: "https://angzla.github.io/projects/StarrySwarm", size: 130 },
