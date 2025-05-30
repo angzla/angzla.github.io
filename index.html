@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,5 +10,52 @@
 </head>
 <body>
   <a href="projects.html" style="position: absolute; top: 20px; right: 30px; color: white; font-family: Georgia; text-decoration: none; font-size: 20px;">Projects</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koi Pond Portfolio</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px 20px;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><a href="/">Home</a></div>
+    <div>
+      <a href="/projects/project1.html">StarrySwarm</a>
+      <a href="/projects/project2.html">Planet Music</a>
+      <a href="/projects/project3.html">Lost in Translation</a>
+    </div>
+  </nav>
+
+  <!-- Your p5.js sketch will run in the background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="koiPond.js"></script>
+  <script src="js/pond-common.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>
