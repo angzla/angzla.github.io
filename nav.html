@@ -1,0 +1,31 @@
+<nav>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+  <style>
+    html, body { margin: 0; overflow: hidden; }
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      padding: 10px 30px;
+      border-radius: 999px;
+      z-index: 10;
+      display: flex;
+      gap: 20px;
+      font-family: 'Georgia', sans-serif;
+      font-size: 16px;
+      color: white;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+  </style>

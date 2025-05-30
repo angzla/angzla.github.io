@@ -10,5 +10,13 @@
   <script src="js/projects.js"></script>
 </head>
 <body>
+    <div id="navbar-placeholder"></div>
+    <script>
+      fetch('/nav.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('navbar-placeholder').innerHTML = html;
+        });
+    </script>
 </body>
 </html>
