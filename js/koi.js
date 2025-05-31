@@ -42,18 +42,51 @@ class KoiFish {
         this.target = null;
         return;
       }
-      // Clamp trailIndex to valid range
-      this.trailIndex = constrain(this.trailIndex, 0, trail.length - 1);
-      let targetStar = trail[this.trailIndex].pos;
-      this.target = targetStar.copy();
+
+      let eatRadius = max(this.size, 10);
+      let target = null;
+      let minDist = Infinity;
     
-      // If close enough to current target star, move to next star
-      if (p5.Vector.dist(this.pos, targetStar) < 10) {
-        this.trailIndex++;
-        if (this.trailIndex >= trail.length) {
-          this.trailIndex = trail.length - 1; // or 0 if you want loop
+      // Find the closest uneaten star
+      for (let i = 0; i < trail.length; i++) {
+        let star = trail[i];
+        if (!star.beingEaten) {
+          let d = dist(this.pos.x, this.pos.y, star.pos.x, star.pos.y);
+          if (d < minDist) {
+            minDist = d;
+            target = star;
+          }
+    
+          // If close enough, eat the star
+          if (d < eatRadius) {
+            star.beingEaten = true;
+            star.fadeStartedAt = millis();
+          }
         }
       }
+    
+      // If there's a valid target, move toward it
+      if (target) {
+        let desired = p5.Vector.sub(target.pos, this.pos);
+        let d = desired.mag();
+    
+        let distanceFactor = constrain(d / 100, 0, 1);
+        let speed = lerp(0.5, this.maxSpeed, distanceFactor);
+        speed = constrain(speed, 0.5, this.maxSpeed);
+        desired.setMag(speed);
+    
+        let steer = p5.Vector.sub(desired, this.vel);
+        steer.limit(this.maxForce);
+    
+        this.acc.add(steer);
+      }
+    
+      this.vel.add(this.acc);
+      this.vel.limit(this.maxSpeed);
+      this.pos.add(this.vel);
+      this.acc.mult(0);
+
+
     }
     
   
@@ -196,13 +229,19 @@ class Star {
     this.pos = createVector(x, y);
     this.size = random(8, 16);
     this.alpha = 255;
-    this.decay = 0.5; // slower fade
+    this.beingEaten = false;      // start fading only once eaten
+    this.fadeStartedAt = 0;       // track fade start time
+    this.fadeDuration = 500;     // fade duration in milliseconds
     this.glow = color(100, 200, 255, this.alpha);
   }
 
   update() {
-    this.alpha -= this.decay;
     this.glow.setAlpha(this.alpha);
+    if (this.beingEaten) {
+      let elapsed = millis() - this.fadeStartedAt;
+      this.alpha = map(elapsed, 0, this.fadeDuration, 255, 0);
+      this.alpha = constrain(this.alpha, 0, 255);
+    }
   }
 
   display() {
@@ -214,6 +253,10 @@ class Star {
     drawingContext.shadowColor = this.glow;
     this.drawStar(0, 0, this.size * 0.5, this.size, 5);
     pop();
+  }
+
+  isFaded() {
+    return this.alpha <= 0;
   }
 
   drawStar(x, y, radius1, radius2, npoints) {
@@ -229,10 +272,6 @@ class Star {
       vertex(sx, sy);
     }
     endShape(CLOSE);
-  }
-
-  isFaded() {
-    return this.alpha <= 0;
   }
 }
 

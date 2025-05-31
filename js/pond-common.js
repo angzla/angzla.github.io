@@ -67,6 +67,7 @@ function resetFish() {
   for (let i = 0; i < 33; i++) {
     koiFish.push(new KoiFish(random(width), random(height)));
   }
+  starTrail = [];
 }
 
 function saveKoiState() {
@@ -89,7 +90,6 @@ function saveKoiState() {
       c: [red(s.c), green(s.c), blue(s.c), alpha(s.c)]
     }))
   }));
-  console.log("Saving koi state:", state);
   localStorage.setItem('savedKoi', JSON.stringify(state));
 }
 
