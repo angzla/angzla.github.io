@@ -12,6 +12,9 @@ class KoiFish {
       this.finWiggle = random(1000);
       this.tailWiggle = random(1000);
       this.trailIndex = 0;
+      this.eaten = false;
+      this.isClicked = false;
+      this.clickTime = 0; 
   
       this.bodyColor = random([
         color(255, 100, 100),
@@ -112,80 +115,102 @@ class KoiFish {
       this.pos.x = constrain(this.pos.x, 0, width);
       this.pos.y = constrain(this.pos.y, 0, height);
     }
+
+
     display() {
+
+      if (this.eaten) {
+        // Optional: draw cat emoji where fish used to be
+        textSize(24);
+        text("🐱", this.pos.x, this.pos.y);
+        return; // don't draw the fish
+      }
+
+      //draw koi as usual 
+      push();
+      translate(this.pos.x, this.pos.y);
+      rotate(this.vel.heading());
+    
+      let tailAngle = sin(this.tailWiggle + frameCount * 0.1) * PI / 8;
+      let finAngle = sin(this.finWiggle + frameCount * 0.2) * PI / 16;
+    
+      drawingContext.shadowBlur = 25;
+      drawingContext.shadowColor = this.bodyColor;
+      noStroke();
+    
+      // Body
+      fill(this.bodyColor);
+      ellipse(0, 0, this.size * 2.4, this.size);
+        
+      // Tail - forked with two prongs
     push();
-    translate(this.pos.x, this.pos.y);
-    rotate(this.vel.heading());
-  
-    let tailAngle = sin(this.tailWiggle + frameCount * 0.1) * PI / 8;
-    let finAngle = sin(this.finWiggle + frameCount * 0.2) * PI / 16;
-  
-    drawingContext.shadowBlur = 25;
-    drawingContext.shadowColor = this.bodyColor;
-    noStroke();
-  
-    // Body
+    translate(-this.size * 1, 0);
+    rotate(tailAngle);
     fill(this.bodyColor);
-    ellipse(0, 0, this.size * 2.4, this.size);
-      
-    // Tail - forked with two prongs
-  push();
-  translate(-this.size * 1, 0);
-  rotate(tailAngle);
-  fill(this.bodyColor);
-  beginShape();
-    // Left prong
-    curveVertex(0, 0);
-    curveVertex(-this.size * 0.6, -this.size * 0.4);
-    curveVertex(-this.size * 0.8, -this.size * 0.2);
-    curveVertex(-this.size * 0.5, 0);
-    // Right prong
-    curveVertex(-this.size * 0.8, this.size * 0.2);
-    curveVertex(-this.size * 0.6, this.size * 0.4);
-    curveVertex(0, 0);
-  endShape(CLOSE);
-  pop();
-  
-  // Fins - small V shapes mimicking tail forks
-  fill(this.bodyColor);
-  
-  // Top fin
-  push();
-  translate(-this.size * 0.1, -this.size * 0.5);
-  rotate(finAngle);
-  beginShape();
-    curveVertex(0, 0);
-    curveVertex(-this.size * 0.3, -this.size * 0.2);
-    curveVertex(-this.size * 0.5, 0);
-    curveVertex(-this.size * 0.3, this.size * 0.2);
-  endShape(CLOSE);
-  pop();
-  
-  // Bottom fin
-  push();
-  translate(-this.size * 0.1, this.size * 0.5);
-  rotate(-finAngle);
-  beginShape();
-    curveVertex(0, 0);
-    curveVertex(-this.size * 0.3, -this.size * 0.2);
-    curveVertex(-this.size * 0.5, 0);
-    curveVertex(-this.size * 0.3, this.size * 0.2);
-  endShape(CLOSE);
-  pop();
-  
-  
-    // Spots
-    for (let s of this.spots) {
-      fill(s.c);
-      ellipse(this.size * s.x, this.size * s.y, this.size * s.w, this.size * s.h);
-    }
-  
-    // Eye
-    fill(0);
-    ellipse(this.size * 0.8, -this.size * 0.15, this.size * 0.1, this.size * 0.1);
-  
+    beginShape();
+      // Left prong
+      curveVertex(0, 0);
+      curveVertex(-this.size * 0.6, -this.size * 0.4);
+      curveVertex(-this.size * 0.8, -this.size * 0.2);
+      curveVertex(-this.size * 0.5, 0);
+      // Right prong
+      curveVertex(-this.size * 0.8, this.size * 0.2);
+      curveVertex(-this.size * 0.6, this.size * 0.4);
+      curveVertex(0, 0);
+    endShape(CLOSE);
     pop();
-  }
+    
+    // Fins - small V shapes mimicking tail forks
+    fill(this.bodyColor);
+    
+    // Top fin
+    push();
+    translate(-this.size * 0.1, -this.size * 0.5);
+    rotate(finAngle);
+    beginShape();
+      curveVertex(0, 0);
+      curveVertex(-this.size * 0.3, -this.size * 0.2);
+      curveVertex(-this.size * 0.5, 0);
+      curveVertex(-this.size * 0.3, this.size * 0.2);
+    endShape(CLOSE);
+    pop();
+    
+    // Bottom fin
+    push();
+    translate(-this.size * 0.1, this.size * 0.5);
+    rotate(-finAngle);
+    beginShape();
+      curveVertex(0, 0);
+      curveVertex(-this.size * 0.3, -this.size * 0.2);
+      curveVertex(-this.size * 0.5, 0);
+      curveVertex(-this.size * 0.3, this.size * 0.2);
+    endShape(CLOSE);
+    pop();
+    
+    
+      // Spots
+      for (let s of this.spots) {
+        fill(s.c);
+        ellipse(this.size * s.x, this.size * s.y, this.size * s.w, this.size * s.h);
+      }
+    
+      // Eye
+      fill(0);
+      ellipse(this.size * 0.8, -this.size * 0.15, this.size * 0.1, this.size * 0.1);
+    
+      pop();
+
+
+      // If clicked, show text bubble
+      if (this.isClicked && millis() - this.clickTime < 2000) {
+        fill(255);
+        textSize(12);
+        textAlign(CENTER);
+        text("✨ blub blub ✨", this.pos.x, this.pos.y - 20);
+      } else {
+        this.isClicked = false;
+      }
+    }
    }
 
 
