@@ -8,8 +8,39 @@ function commonSetup() {
   textFont('Georgia');
   cursor();
 
-  for (let i = 0; i < 33; i++) {
-    koiFish.push(new KoiFish(random(width), random(height)));
+  const saved = JSON.parse(localStorage.getItem('savedKoi'));
+  // if (saved) {
+  //   koiFish = saved.map(f => {
+  //     let k = new KoiFish(f.x, f.y);
+  //     k.size = f.size;
+  //     k.bodyColor = color(...f.bodyColor);
+  //     return k;
+  //   });
+  // }
+  if (saved) {
+    koiFish = saved.map(f => {
+      let k = new KoiFish(f.x, f.y);
+      k.vel = createVector(f.vel[0], f.vel[1]);
+      k.acc = createVector(f.acc[0], f.acc[1]);
+      k.size = f.size;
+      k.maxSpeed = f.maxSpeed;
+      k.noiseOffset = f.noiseOffset;
+      k.finWiggle = f.finWiggle;
+      k.tailWiggle = f.tailWiggle;
+      k.bodyColor = color(...f.bodyColor);
+      k.spots = f.spots.map(s => ({
+        x: s.x,
+        y: s.y,
+        w: s.w,
+        h: s.h,
+        c: color(...s.c)
+      }));
+      return k;
+    });
+  } else {
+    for (let i = 0; i < 33; i++) {
+      koiFish.push(new KoiFish(random(width), random(height)));
+    }
   }
 }
 
@@ -44,4 +75,39 @@ function resetFish() {
     koiFish.push(new KoiFish(random(width), random(height)));
   }
 }
+
+// function saveKoiState() {
+//   const state = koiFish.map(fish => ({
+//     x: fish.pos.x,
+//     y: fish.pos.y,
+//     bodyColor: [red(fish.bodyColor), green(fish.bodyColor), blue(fish.bodyColor)],
+//     size: fish.size
+//   }));
+//   localStorage.setItem('savedKoi', JSON.stringify(state));
+// }
+
+function saveKoiState() {
+  const state = koiFish.map(fish => ({
+    x: fish.pos.x,
+    y: fish.pos.y,
+    vel: [fish.vel.x, fish.vel.y],
+    acc: [fish.acc.x, fish.acc.y],
+    size: fish.size,
+    maxSpeed: fish.maxSpeed,
+    noiseOffset: fish.noiseOffset,
+    finWiggle: fish.finWiggle,
+    tailWiggle: fish.tailWiggle,
+    bodyColor: [red(fish.bodyColor), green(fish.bodyColor), blue(fish.bodyColor), alpha(fish.bodyColor)],
+    spots: fish.spots.map(s => ({
+      x: s.x,
+      y: s.y,
+      w: s.w,
+      h: s.h,
+      c: [red(s.c), green(s.c), blue(s.c), alpha(s.c)]
+    }))
+  }));
+  console.log("Saving koi state:", state);
+  localStorage.setItem('savedKoi', JSON.stringify(state));
+}
+
 

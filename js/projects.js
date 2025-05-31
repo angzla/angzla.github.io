@@ -77,3 +77,4 @@ function mousePressed() {
     }
   }
 }
+window.addEventListener('beforeunload', saveKoiState);
