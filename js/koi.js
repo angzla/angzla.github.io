@@ -11,6 +11,7 @@ class KoiFish {
       this.target = null;
       this.finWiggle = random(1000);
       this.tailWiggle = random(1000);
+      this.trailIndex = 0;
   
       this.bodyColor = random([
         color(255, 100, 100),
@@ -35,6 +36,26 @@ class KoiFish {
     attractTo(targetVec) {
       this.target = targetVec.copy();
     }
+
+    followTrail(trail) {
+      if (trail.length === 0) {
+        this.target = null;
+        return;
+      }
+      // Clamp trailIndex to valid range
+      this.trailIndex = constrain(this.trailIndex, 0, trail.length - 1);
+      let targetStar = trail[this.trailIndex].pos;
+      this.target = targetStar.copy();
+    
+      // If close enough to current target star, move to next star
+      if (p5.Vector.dist(this.pos, targetStar) < 10) {
+        this.trailIndex++;
+        if (this.trailIndex >= trail.length) {
+          this.trailIndex = trail.length - 1; // or 0 if you want loop
+        }
+      }
+    }
+    
   
     update() {
       let wanderAngle = noise(this.noiseOffset + frameCount * 0.01) * TWO_PI * 2;
@@ -168,3 +189,52 @@ class Ripple {
     return this.reflectionRing >= this.size * 2 && this.reflectionRing2 >= this.size * 2;
   }
 }
+
+// ------------------ StarTrail ------------------
+class Star {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.size = random(8, 16);
+    this.alpha = 255;
+    this.decay = 0.5; // slower fade
+    this.glow = color(100, 200, 255, this.alpha);
+  }
+
+  update() {
+    this.alpha -= this.decay;
+    this.glow.setAlpha(this.alpha);
+  }
+
+  display() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    noStroke();
+    fill(this.glow);
+    drawingContext.shadowBlur = 20;
+    drawingContext.shadowColor = this.glow;
+    this.drawStar(0, 0, this.size * 0.5, this.size, 5);
+    pop();
+  }
+
+  drawStar(x, y, radius1, radius2, npoints) {
+    let angle = TWO_PI / npoints;
+    let halfAngle = angle / 2.0;
+    beginShape();
+    for (let a = 0; a < TWO_PI; a += angle) {
+      let sx = x + cos(a) * radius2;
+      let sy = y + sin(a) * radius2;
+      vertex(sx, sy);
+      sx = x + cos(a + halfAngle) * radius1;
+      sy = y + sin(a + halfAngle) * radius1;
+      vertex(sx, sy);
+    }
+    endShape(CLOSE);
+  }
+
+  isFaded() {
+    return this.alpha <= 0;
+  }
+}
+
+
+

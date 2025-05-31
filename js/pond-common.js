@@ -1,5 +1,6 @@
 let koiFish = [];
 let ripples = [];
+let starTrail = [];
 
 function commonSetup() {
   createCanvas(windowWidth, windowHeight);
@@ -9,14 +10,6 @@ function commonSetup() {
   cursor();
 
   const saved = JSON.parse(localStorage.getItem('savedKoi'));
-  // if (saved) {
-  //   koiFish = saved.map(f => {
-  //     let k = new KoiFish(f.x, f.y);
-  //     k.size = f.size;
-  //     k.bodyColor = color(...f.bodyColor);
-  //     return k;
-  //   });
-  // }
   if (saved) {
     koiFish = saved.map(f => {
       let k = new KoiFish(f.x, f.y);
@@ -75,16 +68,6 @@ function resetFish() {
     koiFish.push(new KoiFish(random(width), random(height)));
   }
 }
-
-// function saveKoiState() {
-//   const state = koiFish.map(fish => ({
-//     x: fish.pos.x,
-//     y: fish.pos.y,
-//     bodyColor: [red(fish.bodyColor), green(fish.bodyColor), blue(fish.bodyColor)],
-//     size: fish.size
-//   }));
-//   localStorage.setItem('savedKoi', JSON.stringify(state));
-// }
 
 function saveKoiState() {
   const state = koiFish.map(fish => ({
