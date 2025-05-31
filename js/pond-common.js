@@ -27,3 +27,21 @@ function attractKoi(mx, my) {
     koi.attractTo(attractPoint);
   }
 }
+
+function addFish() {
+  koiFish.push(new KoiFish(random(width), random(height)));
+}
+
+function removeFish() {
+  if (koiFish.length > 0) {
+    koiFish.pop();
+  }
+}
+
+function resetFish() {
+  koiFish = [];
+  for (let i = 0; i < 33; i++) {
+    koiFish.push(new KoiFish(random(width), random(height)));
+  }
+}
+

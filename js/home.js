@@ -17,5 +17,6 @@ function setup() {
   }
   
   function mousePressed() {
+    if (event.target.tagName === 'BUTTON') return;
     attractKoi(mouseX, mouseY);
   }  

@@ -10,6 +10,11 @@
 </head>
 <body>
   <div id="navbar-placeholder"></div>
+  <div id="controls" style="position: absolute; top: 10px; left: 10px; z-index: 10;">
+    <button onclick="addFish()">➕</button>
+    <button onclick="removeFish()">➖</button>
+    <button onclick="resetFish()">🔄</button>
+  </div>  
   <script>
     fetch('/nav.html')
       .then(res => res.text())
