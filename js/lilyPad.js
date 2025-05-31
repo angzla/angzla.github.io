@@ -11,7 +11,11 @@ class Flower {
     this.directionx = dx;
     this.directiony = dy;
     this.sizeFactor = sizeFactor;
-    this.localScale = 0;
+    this.localScale = 20;
+    this.isGrowing = false;
+    this.isShrinking = false; 
+    this.maxScale = 20 * this.sizeFactor;
+    this.finished = false
     }
       
     update() {
@@ -22,11 +26,27 @@ class Flower {
     noStroke();
 
     for (let i = 0; i < 10; i++) {
-      ellipse(0, 30, 20 * this.sizeFactor, this.localScale += 0.2);
-      if (this.localScale >= 20 * this.sizeFactor) {
-        this.localScale = 0;
-      }
+      ellipse(0, 30, 20 * this.sizeFactor, this.localScale);
       rotate(PI / 5);
+    }
+
+    // Grow if flag is true
+    if (this.isGrowing) {
+      this.localScale += 2;  // Growth speed
+      if (this.localScale >= this.maxScale) {
+        this.isGrowing = false;
+        this.isShrinking = true
+      }
+    }
+
+    // shrink!! 
+    if (this.isShrinking) {
+      this.localScale += -2;  // Growth speed
+      if (this.localScale <= 20) {
+        this.isShrinking = false;
+        this.localScale = 20
+        this.finished = true 
+      }
     }
 
     pop();
@@ -85,7 +105,7 @@ class LilyPad {
     noStroke();
     fill(14, 184, 12, 220);
 
-    // Draw arc shape like your original
+    // Draw arc shape
     let startAngle = PI / 4;
     let endAngle = PI / 10;
     arc(0, this.size / 2, this.size, this.size, startAngle, endAngle, PIE);

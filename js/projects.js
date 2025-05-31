@@ -1,5 +1,8 @@
 let lilyPads = [];
 let flowers = [];
+let flowerToOpen = null;
+let linkToOpen = null;
+
 
 function setup() {
   commonSetup();
@@ -45,15 +48,25 @@ function draw() {
     lilyPads[i].display();
     flowers[i].update();
   }
+
+  if (flowerToOpen && flowerToOpen.finished) {
+    window.open(linkToOpen, "_blank");
+    flowerToOpen = null;
+    linkToOpen = null;
+  }
+  
 }
 
 function mousePressed() {
-  for (let pad of lilyPads) {
-    if (pad.contains(mouseX, mouseY)) {
-      window.open(pad.link, "_blank");
+  attractKoi(mouseX, mouseY);
+
+  for (let i = 0; i < lilyPads.length; i++) {
+    if (lilyPads[i].contains(mouseX, mouseY)) {
+      // flower growth 
+      flowers[i].isGrowing = true;
+      flowerToOpen = flowers[i];
+      linkToOpen = lilyPads[i].link;
       return;
     }
   }
-
-  attractKoi(mouseX, mouseY);
 }
