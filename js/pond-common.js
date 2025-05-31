@@ -1,4 +1,5 @@
 let koiFish = [];
+let ripples = [];
 
 function commonSetup() {
   createCanvas(windowWidth, windowHeight);
@@ -21,6 +22,7 @@ function updateKoi() {
 
 function attractKoi(mx, my) {
   let attractPoint = createVector(mx, my);
+  ripples.push(new Ripple(mx,my))
   for (let koi of koiFish) {
     koi.attractTo(attractPoint);
   }

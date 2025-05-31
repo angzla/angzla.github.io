@@ -133,3 +133,38 @@ class KoiFish {
     pop();
   }
    }
+
+
+// ------------------ RIPPLE ------------------
+
+class Ripple {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.size = 50;
+    this.reflectionRing = 0;
+    this.reflectionRing2 = this.size * 0.7;
+    this.strokeValue = 400;
+    this.strokeValue2 = 400;
+  }
+
+  update() {
+    noFill();
+    stroke(100, this.strokeValue);
+    if (this.reflectionRing < this.size * 2) {
+      circle(this.pos.x, this.pos.y, this.reflectionRing);
+      this.reflectionRing += 1;
+      this.strokeValue -= 40 / (this.size * 2);
+    }
+
+    stroke(100, this.strokeValue2);
+    if (this.reflectionRing2 < this.size * 2) {
+      circle(this.pos.x, this.pos.y, this.reflectionRing2);
+      this.reflectionRing2 += 1;
+      this.strokeValue2 -= 40 / (this.size * 2);
+    }
+  }
+
+  isFinished() {
+    return this.reflectionRing >= this.size * 2 && this.reflectionRing2 >= this.size * 2;
+  }
+}
