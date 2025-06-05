@@ -90,4 +90,13 @@ function saveKoiState() {
       y: s.y,
       w: s.w,
       h: s.h,
-      c: [red(s.c), green(s.c), blue(s.c), alp
+      c: [red(s.c), green(s.c), blue(s.c), alpha(s.c)]
+    })),
+    eaten: fish.eaten,
+    isClicked: fish.isClicked,
+    message: fish.message
+  }));
+  localStorage.setItem('savedKoi', JSON.stringify(state));
+}
+
+

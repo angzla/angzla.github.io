@@ -91,6 +91,60 @@ class KoiFish {
 
 
     }
+
+    drawFishBones() {
+      push();
+      translate(this.pos.x, this.pos.y);
+      rotate(this.vel.heading());
+    
+      // White glowing stroke
+      stroke(255);
+      strokeWeight(2);
+      noFill();
+      drawingContext.shadowBlur = 20;
+      drawingContext.shadowColor = color(255);
+    
+      const bodyWidth = this.size * 2.4;
+      const bodyHeight = this.size;
+    
+      // Draw spine
+      const spineStart = -bodyWidth / 2;
+      const spineEnd = bodyWidth / 2;
+      line(spineStart, 0, spineEnd, 0);
+    
+      // Draw ribs
+      const numRibs = 6;
+      const ribSpacing = bodyWidth / (numRibs + 1);
+      const ribLength = bodyHeight * 0.6;
+    
+      for (let i = 1; i <= numRibs; i++) {
+        const x = spineStart + i * ribSpacing;
+        line(x, 0, x, -ribLength / 2);
+        line(x, 0, x, ribLength / 2);
+      }
+    
+      // Tail (two bones forming a fork)
+      const tailLength = this.size * 0.8;
+      const tailAngle = PI / 6;
+      line(spineStart, 0, spineStart - cos(tailAngle) * tailLength, -sin(tailAngle) * tailLength);
+      line(spineStart, 0, spineStart - cos(tailAngle) * tailLength, sin(tailAngle) * tailLength);
+    
+      // Head (triangle)
+      noStroke();
+      fill(255);
+      drawingContext.shadowBlur = 25;
+      drawingContext.shadowColor = color(255);
+      const headW = this.size * 0.5;
+      const headH = this.size * 1.2;
+      triangle(spineEnd, 0, spineEnd + headW, -headH / 2, spineEnd + headW, headH / 2);
+    
+      // Eye (black dot on triangle)
+      fill(0);
+      ellipse(spineEnd + headW * 0.6, -headH * 0.2, this.size * 0.2);
+    
+      pop();
+    }
+    
     
   
     update() {
@@ -121,9 +175,12 @@ class KoiFish {
 
       if (this.eaten) {
         // draw cat emoji 
-        textSize(24);
-        text("🐱", this.pos.x, this.pos.y);
-        return; // don't draw the fish
+        fill(255);
+        textSize(12);
+        textAlign(CENTER);
+        text("MEOW 🐱", this.pos.x, this.pos.y - 20);
+        this.drawFishBones();
+        return; // draw fish bones 
       }
 
       //draw koi as usual 
@@ -203,7 +260,6 @@ class KoiFish {
 
       // If clicked, show text bubble
       if (this.isClicked) {
-        console.log("message", this.message);
         fill(255);
         textSize(12);
         textAlign(CENTER);
@@ -297,3 +353,10 @@ class Star {
       sx = x + cos(a + halfAngle) * radius1;
       sy = y + sin(a + halfAngle) * radius1;
       vertex(sx, sy);
+    }
+    endShape(CLOSE);
+  }
+}
+
+
+
