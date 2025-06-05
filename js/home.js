@@ -1,3 +1,9 @@
+let cat;
+let popups = [];
+function preload() {
+  cat = loadImage('cat.jpg');
+}
+
 function setup() {
     commonSetup();
     cursor();
@@ -27,8 +33,17 @@ function setup() {
   if (starTrail.length > 0)
     {for (let koi of koiFish) {
       koi.followTrail(starTrail);
+    }
   }
-}
+
+  for (let i = popups.length - 1; i >= 0; i--) {
+    popups[i].update();
+    popups[i].display();
+    if (popups[i].isDone()) {
+      popups.splice(i, 1); // remove finished animations
+    }
+  }
+  
   
   }
   
@@ -46,41 +61,4 @@ function setup() {
           const input = document.getElementById("koiMessageInput");
           input.style.display = "block";
           input.style.position = "absolute";
-          input.style.left = `${mouseX + 10}px`;
-          input.style.top = `${mouseY - 10}px`;
-          input.focus();
-
-          const clickedKoi = koi;
-          input.onkeydown = null;
-
-          // When the user presses Enter, store the message and hide the input
-          input.onkeydown = (e) => {
-            if (e.key === "Enter") {
-              // clickedKoi.message = input.value;
-              clickedKoi.message = input.value.trim() || "✨ blub blub ✨";
-              clickedKoi.isClicked = true;
-              clickedKoi.clickTime = millis();
-              input.value = "";
-              input.style.display = "none";
-            }
-          };
-        } else {
-          // Cat eats fish
-          koi.eaten = true;
-          // Optionally: trigger a cat animation here
-        }
-        return;
-      }
-    }
-
-    attractKoi(mouseX, mouseY);
-  }
-
-  function mouseDragged() {
-    if (event.target.tagName === 'BUTTON') return;
-    starTrail.push(new Star(mouseX, mouseY));
-    return false; // prevent default drag behavior
-  }
-  
-  
-  window.addEventListener('beforeunload', saveKoiState);
+          input.style

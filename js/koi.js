@@ -123,24 +123,26 @@ class KoiFish {
         line(x, 0, x, ribLength / 2);
       }
     
-      // Tail (two bones forming a fork)
+      // Tail
       const tailLength = this.size * 0.8;
       const tailAngle = PI / 6;
       line(spineStart, 0, spineStart - cos(tailAngle) * tailLength, -sin(tailAngle) * tailLength);
       line(spineStart, 0, spineStart - cos(tailAngle) * tailLength, sin(tailAngle) * tailLength);
     
-      // Head (triangle)
+      // Head
       noStroke();
       fill(255);
       drawingContext.shadowBlur = 25;
       drawingContext.shadowColor = color(255);
       const headW = this.size * 0.5;
       const headH = this.size * 1.2;
-      triangle(spineEnd, 0, spineEnd + headW, -headH / 2, spineEnd + headW, headH / 2);
+      // triangle(spineEnd, 0, spineEnd + headW, -headH / 2, spineEnd + headW, headH / 2);
+      triangle(spineEnd, 0, spineEnd - headW, -headH / 2, spineEnd - headW, headH / 2);
+
     
-      // Eye (black dot on triangle)
+      // Eye
       fill(0);
-      ellipse(spineEnd + headW * 0.6, -headH * 0.2, this.size * 0.2);
+      ellipse(spineEnd - headW * 0.6, -headH * 0.2, this.size * 0.1);
     
       pop();
     }
@@ -174,13 +176,8 @@ class KoiFish {
     display() {
 
       if (this.eaten) {
-        // draw cat emoji 
-        fill(255);
-        textSize(12);
-        textAlign(CENTER);
-        text("MEOW 🐱", this.pos.x, this.pos.y - 20);
         this.drawFishBones();
-        return; // draw fish bones 
+        return; 
       }
 
       //draw koi as usual 
@@ -199,7 +196,7 @@ class KoiFish {
       fill(this.bodyColor);
       ellipse(0, 0, this.size * 2.4, this.size);
         
-      // Tail - forked with two prongs
+      // Tail
       push();
       translate(-this.size * 1, 0);
       rotate(tailAngle);
@@ -218,7 +215,7 @@ class KoiFish {
       endShape(CLOSE);
       pop();
     
-      // Fins - small V shapes mimicking tail forks
+      // Fins
       fill(this.bodyColor);
       
       // Top fin
@@ -258,7 +255,7 @@ class KoiFish {
     
       pop();
 
-      // If clicked, show text bubble
+      // If clicked, show text
       if (this.isClicked) {
         fill(255);
         textSize(12);
@@ -357,6 +354,51 @@ class Star {
     endShape(CLOSE);
   }
 }
+
+// ------------------ CAT ------------------
+class Cat {
+  constructor(img) {
+    this.img = img;
+    this.x = width - 280;
+    this.y = height + 100;
+    this.velocity = -10;
+    this.state = "up";
+    this.opacity = 200;
+  }
+
+  update() {
+    if (this.state === "up") {
+      this.y += this.velocity;
+      if (this.y < height - 250) {
+        this.state = "down";
+        this.velocity = 10;
+      }
+    } else if (this.state === "down") {
+      this.y += this.velocity;
+      this.opacity -= 1;
+      if (this.y > height + 200) {
+        this.state = "done";
+      }
+    }
+  }
+
+  display() {
+    if (this.state === "done") return;
+    push();
+    tint(255, this.opacity);
+    image(this.img, this.x, this.y, 300, 300);
+    pop();
+    fill(255);
+    textSize(50);
+    textAlign(CENTER);
+    text("MEOW", this.x, this.y);
+  }
+
+  isDone() {
+    return this.state === "done";
+  }
+}
+
 
 
 
