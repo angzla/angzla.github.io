@@ -14,7 +14,6 @@ class KoiFish {
       this.trailIndex = 0;
       this.eaten = false;
       this.isClicked = false;
-      this.clickTime = 0;
       this.message =  "✨ blub blub ✨"
   
       this.bodyColor = random([
@@ -212,7 +211,7 @@ class KoiFish {
       } else {
         this.isClicked = false;
       }
-      
+
     }
    }
 
@@ -296,4 +295,5 @@ class Star {
       let sy = y + sin(a) * radius2;
       vertex(sx, sy);
       sx = x + cos(a + halfAngle) * radius1;
-      sy = y + sin(a + halfAngle) *
+      sy = y + sin(a + halfAngle) * radius1;
+      vertex(sx, sy);

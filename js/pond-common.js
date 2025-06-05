@@ -21,6 +21,9 @@ function commonSetup() {
       k.finWiggle = f.finWiggle;
       k.tailWiggle = f.tailWiggle;
       k.bodyColor = color(...f.bodyColor);
+      k.eaten = f.eaten;
+      k.isClicked = f.isClicked;
+      k.message = f.message;
       k.spots = f.spots.map(s => ({
         x: s.x,
         y: s.y,
@@ -87,10 +90,4 @@ function saveKoiState() {
       y: s.y,
       w: s.w,
       h: s.h,
-      c: [red(s.c), green(s.c), blue(s.c), alpha(s.c)]
-    }))
-  }));
-  localStorage.setItem('savedKoi', JSON.stringify(state));
-}
-
-
+      c: [red(s.c), green(s.c), blue(s.c), alp
