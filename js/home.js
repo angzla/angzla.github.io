@@ -61,4 +61,41 @@ function setup() {
           const input = document.getElementById("koiMessageInput");
           input.style.display = "block";
           input.style.position = "absolute";
-          input.style
+          input.style.left = `${mouseX + 10}px`;
+          input.style.top = `${mouseY - 10}px`;
+          input.focus();
+
+          const clickedKoi = koi;
+          input.onkeydown = null;
+
+          // When the user presses Enter, store the message and hide the input
+          input.onkeydown = (e) => {
+            if (e.key === "Enter") {
+              // clickedKoi.message = input.value;
+              clickedKoi.message = input.value.trim() || "✨ blub blub ✨";
+              clickedKoi.isClicked = true;
+              clickedKoi.clickTime = millis();
+              input.value = "";
+              input.style.display = "none";
+            }
+          };
+        } else {
+          // Cat eats fish
+          koi.eaten = true;
+          popups.push(new Cat(cat));
+        }
+        return;
+      }
+    }
+
+    attractKoi(mouseX, mouseY);
+  }
+
+  function mouseDragged() {
+    if (event.target.tagName === 'BUTTON') return;
+    starTrail.push(new Star(mouseX, mouseY));
+    return false; // prevent default drag behavior
+  }
+  
+  
+  window.addEventListener('beforeunload', saveKoiState);
