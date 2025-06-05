@@ -14,7 +14,8 @@ class KoiFish {
       this.trailIndex = 0;
       this.eaten = false;
       this.isClicked = false;
-      this.clickTime = 0; 
+      this.clickTime = 0;
+      this.message =  "✨ blub blub ✨"
   
       this.bodyColor = random([
         color(255, 100, 100),
@@ -120,7 +121,7 @@ class KoiFish {
     display() {
 
       if (this.eaten) {
-        // Optional: draw cat emoji where fish used to be
+        // draw cat emoji 
         textSize(24);
         text("🐱", this.pos.x, this.pos.y);
         return; // don't draw the fish
@@ -143,11 +144,12 @@ class KoiFish {
       ellipse(0, 0, this.size * 2.4, this.size);
         
       // Tail - forked with two prongs
-    push();
-    translate(-this.size * 1, 0);
-    rotate(tailAngle);
-    fill(this.bodyColor);
-    beginShape();
+      push();
+      translate(-this.size * 1, 0);
+      rotate(tailAngle);
+      fill(this.bodyColor);
+      beginShape();
+
       // Left prong
       curveVertex(0, 0);
       curveVertex(-this.size * 0.6, -this.size * 0.4);
@@ -157,35 +159,35 @@ class KoiFish {
       curveVertex(-this.size * 0.8, this.size * 0.2);
       curveVertex(-this.size * 0.6, this.size * 0.4);
       curveVertex(0, 0);
-    endShape(CLOSE);
-    pop();
+      endShape(CLOSE);
+      pop();
     
-    // Fins - small V shapes mimicking tail forks
-    fill(this.bodyColor);
-    
-    // Top fin
-    push();
-    translate(-this.size * 0.1, -this.size * 0.5);
-    rotate(finAngle);
-    beginShape();
+      // Fins - small V shapes mimicking tail forks
+      fill(this.bodyColor);
+      
+      // Top fin
+      push();
+      translate(-this.size * 0.1, -this.size * 0.5);
+      rotate(finAngle);
+      beginShape();
       curveVertex(0, 0);
       curveVertex(-this.size * 0.3, -this.size * 0.2);
       curveVertex(-this.size * 0.5, 0);
       curveVertex(-this.size * 0.3, this.size * 0.2);
-    endShape(CLOSE);
-    pop();
+      endShape(CLOSE);
+      pop();
     
-    // Bottom fin
-    push();
-    translate(-this.size * 0.1, this.size * 0.5);
-    rotate(-finAngle);
-    beginShape();
+      // Bottom fin
+      push();
+      translate(-this.size * 0.1, this.size * 0.5);
+      rotate(-finAngle);
+      beginShape();
       curveVertex(0, 0);
       curveVertex(-this.size * 0.3, -this.size * 0.2);
       curveVertex(-this.size * 0.5, 0);
       curveVertex(-this.size * 0.3, this.size * 0.2);
-    endShape(CLOSE);
-    pop();
+      endShape(CLOSE);
+      pop();
     
     
       // Spots
@@ -200,16 +202,17 @@ class KoiFish {
     
       pop();
 
-
       // If clicked, show text bubble
-      if (this.isClicked && millis() - this.clickTime < 2000) {
+      if (this.isClicked) {
+        console.log("message", this.message);
         fill(255);
         textSize(12);
         textAlign(CENTER);
-        text("✨ blub blub ✨", this.pos.x, this.pos.y - 20);
+        text(this.message, this.pos.x, this.pos.y - 20);
       } else {
         this.isClicked = false;
       }
+      
     }
    }
 
@@ -293,12 +296,4 @@ class Star {
       let sy = y + sin(a) * radius2;
       vertex(sx, sy);
       sx = x + cos(a + halfAngle) * radius1;
-      sy = y + sin(a + halfAngle) * radius1;
-      vertex(sx, sy);
-    }
-    endShape(CLOSE);
-  }
-}
-
-
-
+      sy = y + sin(a + halfAngle) *

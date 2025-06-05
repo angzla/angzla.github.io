@@ -40,27 +40,18 @@ function setup() {
       let d = dist(mouseX, mouseY, koi.pos.x, koi.pos.y);
       if (d < 20 && !koi.eaten) {
         // Coin toss
-        if (random() < 0.5) {
+        if (random() < 0.7) {
           // Text bubble
-          koi.isClicked = true;
-          koi.clickTime = millis();
-        } else {
-          // Cat eats fish
-          koi.eaten = true;
-          // Optionally: trigger a cat animation here
-        }
-        return;
-      }
-    }
+          // Show input box and position it near the koi
+          const input = document.getElementById("koiMessageInput");
+          input.style.display = "block";
+          input.style.position = "absolute";
+          input.style.left = `${mouseX + 10}px`;
+          input.style.top = `${mouseY - 10}px`;
+          input.focus();
 
-    attractKoi(mouseX, mouseY);
-  }
+          const clickedKoi = koi;
+          input.onkeydown = null;
 
-  function mouseDragged() {
-    if (event.target.tagName === 'BUTTON') return;
-    starTrail.push(new Star(mouseX, mouseY));
-    return false; // prevent default drag behavior
-  }
-  
-  
-  window.addEventListener('beforeunload', saveKoiState);
+          // When the user presses Enter, store the message and hide the input
+          input.onkeydown = (e) =
