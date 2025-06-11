@@ -42,7 +42,7 @@ function commonSetup() {
 
 function updateKoi() {
   for (let koi of koiFish) {
-    koi.update();
+    if (!isFrozen) koi.update();
     koi.display();
   }
 }
@@ -78,7 +78,16 @@ function resetFish() {
 }
 
 function freezeFish() {
-  
+  isFrozen = !isFrozen;
+  const button = document.querySelector('#controls button[title="Freeze Fish"] i');
+
+  if (isFrozen) {
+    button.classList.remove('fa-circle-stop');
+    button.classList.add('fa-play');
+  } else {
+    button.classList.remove('fa-play');
+    button.classList.add('fa-circle-stop');
+  }
 }
 
 function saveKoiState() {

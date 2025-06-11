@@ -1,5 +1,7 @@
 let cat;
 let popups = [];
+let isFrozen = false;
+
 function preload() {
   cat = loadImage('cat.jpg');
 }
@@ -14,7 +16,7 @@ function setup() {
     updateKoi();
 
     for (let i = ripples.length - 1; i >= 0; i--) {
-      ripples[i].update();
+      if (!isFrozen) ripples[i].update();
       if (ripples[i].isFinished()) {
         ripples.splice(i, 1);
       }
@@ -22,7 +24,7 @@ function setup() {
 
     // Star trail
     for (let i = starTrail.length - 1; i >= 0; i--) {
-      starTrail[i].update();
+      if (!isFrozen) starTrail[i].update();
       starTrail[i].display();
       if (starTrail[i].isFaded()) {
         starTrail.splice(i, 1);
@@ -32,7 +34,7 @@ function setup() {
   // Have koi follow the whole trail
   if (starTrail.length > 0)
     {for (let koi of koiFish) {
-      koi.followTrail(starTrail);
+      if (!isFrozen) koi.followTrail(starTrail);
     }
   }
 
