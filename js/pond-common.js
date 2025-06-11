@@ -55,6 +55,10 @@ function attractKoi(mx, my) {
   }
 }
 
+function ripple(mx, my) {
+  ripples.push(new Ripple(mx,my))
+}
+
 function addFish() {
   koiFish.push(new KoiFish(random(width), random(height)));
 }

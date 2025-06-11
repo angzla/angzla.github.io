@@ -50,7 +50,6 @@ function setup() {
   function mousePressed() {
     if (event.target.tagName === 'BUTTON') return;
 
-    // Check if a fish was clicked
     for (let koi of koiFish) {
       let d = dist(mouseX, mouseY, koi.pos.x, koi.pos.y);
       if (d < 20 && !koi.eaten) {
@@ -87,8 +86,7 @@ function setup() {
         return;
       }
     }
-
-    attractKoi(mouseX, mouseY);
+    ripple(mouseX, mouseY);
   }
 
   function mouseDragged() {
