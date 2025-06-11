@@ -44,6 +44,45 @@
       transform: scale(0.97);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
+
+    #infoPopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    #infoContent {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      font-family: Georgia, serif;
+      text-align: center;
+    }
+
+    #closeInfo {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      border: none;
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666;
+    }
+    #closeInfo:hover {
+      color: #000;
+    }
+
   </style>  
 </head>
 <body>
@@ -63,5 +102,30 @@
       });
   </script>
   <input type="text" id="koiMessageInput" placeholder="Give a message for this koi!" style="display:none;" />
+
+  <div id="infoPopup" style="display:none;">
+    <div id="infoContent">
+      <button id="closeInfo">&times;</button>
+      <h2>Welcome to my pond!</h2>
+      <p>
+        ⋆｡𖦹°‧𓆝 ⋆｡𖦹°‧𓆟 ⋆｡𖦹°‧𓆞⋆｡𖦹°‧ 𓆝 ⋆｡𖦹°‧ <br><br>
+        ✩°｡⋆ Drag your mouse to feed the fish some stars ⋆｡°✩<br><br>
+        ฅᨐฅ Click on a koi to give it a message but be careful of Miki ฅᨐฅ <br><br>
+        Add, remove, reset, or freeze the fish with the buttons above. <br><br>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function infoFish() {
+      document.getElementById("infoPopup").style.display = "flex";
+    }
+    
+    document.getElementById("closeInfo").onclick = () => {
+      document.getElementById("infoPopup").style.display = "none";
+    };
+    </script>
+
+
 </body>
 </html>

@@ -50,7 +50,10 @@ function setup() {
   }
   
   function mousePressed() {
-    if (event.target.tagName === 'BUTTON') return;
+    if (
+      event.target.closest('#infoPopup') ||
+      event.target.tagName === 'BUTTON') 
+      return;
 
     for (let koi of koiFish) {
       let d = dist(mouseX, mouseY, koi.pos.x, koi.pos.y);
