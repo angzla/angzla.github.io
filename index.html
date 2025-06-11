@@ -7,13 +7,53 @@
   <script src="js/koi.js"></script>
   <script src="js/pond-common.js"></script>
   <script src="js/home.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+  
+    #controls button {
+      background-color: #ffffffaa;
+      border: none;
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+  
+    #controls button:hover {
+      background-color: #ffffffdd;
+      transform: scale(1.05);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+  
+    #controls button:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  </style>  
 </head>
 <body>
   <div id="navbar-placeholder"></div>
   <div id="controls" style="position: absolute; top: 10px; left: 10px; z-index: 10;">
-    <button onclick="addFish()">➕</button>
-    <button onclick="removeFish()">➖</button>
-    <button onclick="resetFish()">🔄</button>
+    <button onclick="infoFish()" title="Info"><i class="fas fa-fish-fins"> ? </i></button>
+    <button onclick="addFish()" title="Add Fish">+</button>
+    <button onclick="removeFish()" title="Remove Fish">-</button>
+    <button onclick="resetFish()" title="Reset Fish"><i class="fas fa-rotate-right"></i></button>
+    <button onclick="freezeFish()" title="Freeze Fish"><i class="fas fa-circle-stop"></i></button>
   </div>  
   <script>
     fetch('/nav.html')

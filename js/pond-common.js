@@ -77,6 +77,10 @@ function resetFish() {
   starTrail = [];
 }
 
+function freezeFish() {
+  
+}
+
 function saveKoiState() {
   const state = koiFish.map(fish => ({
     x: fish.pos.x,
