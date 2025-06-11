@@ -50,24 +50,29 @@ function setup() {
   }
   
   function mousePressed() {
+
+    const input = document.getElementById("koiMessageInput");
+
     if (
+      event.target.closest('#koiMessageInput') ||
       event.target.closest('#infoPopup') ||
       event.target.tagName === 'BUTTON') 
       return;
-
+    
+    let koiWasClicked = false;
+    
     for (let koi of koiFish) {
       let d = dist(mouseX, mouseY, koi.pos.x, koi.pos.y);
       if (d < 20 && !koi.eaten) {
+        koiWasClicked = true;
         // Coin toss
         if (random() < 0.7) {
           // Text bubble
-          // Show input box and position it near the koi
-          const input = document.getElementById("koiMessageInput");
+          // const input = document.getElementById("koiMessageInput");
           input.style.display = "block";
           input.style.position = "absolute";
           input.style.left = `${mouseX + 10}px`;
           input.style.top = `${mouseY - 10}px`;
-          input.focus();
 
           const clickedKoi = koi;
           input.onkeydown = null;
@@ -75,7 +80,6 @@ function setup() {
           // When the user presses Enter, store the message and hide the input
           input.onkeydown = (e) => {
             if (e.key === "Enter") {
-              // clickedKoi.message = input.value;
               clickedKoi.message = input.value.trim() || "✨ blub blub ✨";
               clickedKoi.isClicked = true;
               clickedKoi.clickTime = millis();
@@ -91,6 +95,11 @@ function setup() {
         return;
       }
     }
+
+    if (!koiWasClicked) {
+      input.style.display = "none";
+    }
+
     ripple(mouseX, mouseY);
   }
 
