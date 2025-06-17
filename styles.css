@@ -1,0 +1,101 @@
+
+body {
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    }
+  
+  #controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+  }
+
+  #controls button {
+    background-color: #ffffffaa;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+  }
+
+  #controls button:hover {
+    background-color: #ffffffdd;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  #controls button:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  #infoPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+
+  #infoContent {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 300px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  #closeInfo {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+  }
+
+  #closeInfo:hover {
+    color: #000;
+  }
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 10px 30px;
+    border-radius: 999px;
+    z-index: 10;
+    display: flex;
+    gap: 20px;
+    font-size: 16px;
+    color: white;
+  }
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+  }

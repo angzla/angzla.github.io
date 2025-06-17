@@ -3,7 +3,6 @@ let flowers = [];
 let flowerToOpen = null;
 let linkToOpen = null;
 
-
 function setup() {
   commonSetup();
   cursor();

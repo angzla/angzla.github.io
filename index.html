@@ -8,82 +8,10 @@
   <script src="js/pond-common.js"></script>
   <script src="js/home.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    #controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 10;
-      display: flex;
-      gap: 10px;
-    }
-  
-    #controls button {
-      background-color: #ffffffaa;
-      border: none;
-      border-radius: 12px;
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease;
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-    }
-  
-    #controls button:hover {
-      background-color: #ffffffdd;
-      transform: scale(1.05);
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    }
-  
-    #controls button:active {
-      transform: scale(0.97);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    #infoPopup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 20;
-    }
-
-    #infoContent {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      width: 300px;
-      position: relative;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      font-family: Georgia, serif;
-      text-align: center;
-    }
-
-    #closeInfo {
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      border: none;
-      background: none;
-      font-size: 20px;
-      cursor: pointer;
-      color: #666;
-    }
-    #closeInfo:hover {
-      color: #000;
-    }
-
-  </style>  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
   <div id="navbar-placeholder"></div>
