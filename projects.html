@@ -3,25 +3,222 @@
 <head>
   <meta charset="UTF-8" />
   <title>Projects</title>
+  
+  <!-- Background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
   <script src="js/koi.js"></script>
   <script src="js/lilyPad.js"></script>
   <script src="js/pond-other.js"></script>
   <script src="js/projects.js"></script>
+
+  <!-- Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    canvas {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: -1;
+      pointer-events: none;
+      height: auto;
+    }
+    html, body {
+      margin: 0;
+      padding: 0; 
+      font-family: 'Source Code Pro', monospace;
+
+      background: transparent;
+      color: white;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      height: auto 
+    }
+
+    .portfolio-container {
+      position: relative;
+      z-index: 1;
+      padding: 100px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+
+
+    .portfolio-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .portfolio-item {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      transition: transform 0.2s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .portfolio-item img {
+      width: 120px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .portfolio-item .text {
+      flex: 1;
+    }
+
+    .portfolio-item h2 {
+      margin: 0;
+      font-size: 24px;
+      color: white;
+    }
+
+    .portfolio-item p {
+      margin-top: 8px;
+      color: #ddd;
+    }
+  </style>
 </head>
+
 <body>
-    <div id="navbar-placeholder"></div>
-    <script>
-      fetch('/nav.html')
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById('navbar-placeholder').innerHTML = html;
-        });
-    </script>
+  <div id="navbar-placeholder"></div>
+  <script>
+    fetch('/nav.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('navbar-placeholder').innerHTML = html;
+      });
+  </script>
+
+  <div class="portfolio-container">
+    <a href="https://angzla.github.io/projects/StarrySwarm" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 1">
+        <div class="text">
+          <h2>StarrySwarm</h2>
+          <p>This is a description of the first project. It does cool things.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://angzla.github.io/projects/planetmusic" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Planet Music</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://angzla.github.io/projects/lostintranslation" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 3">
+        <div class="text">
+          <h2>Lost In Translation</h2>
+          <p>This project features interactivity and animation with JavaScript.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://angzla.github.io/projects/tattoodoodler" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Tattoo Doodler</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://angzla.github.io/projects/wantingsmoothair" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Wanting Smooth Air</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/angzla/audio_translate_unity" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Headset Audio Translator</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://example.com/project2" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Project Two</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/angzla/image-playlist-generator" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>Image Playlist Generator</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/angzla/Numberboxd-Final" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>TV Show Logger</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/angzla/LA-County-Redistricting" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>LA County Redistricting</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/angzla/Numberboxd-Final" class="portfolio-link" target="_blank">
+      <div class="portfolio-item">
+        <img src="cat.jpg" alt="Project 2">
+        <div class="text">
+          <h2>TV Show Logger</h2>
+          <p>This is another project that shows something amazing.</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
 </body>
 </html>

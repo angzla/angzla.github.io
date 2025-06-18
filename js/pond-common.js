@@ -1,9 +1,20 @@
 let koiFish = [];
 let ripples = [];
 let starTrail = [];
+let lastHeight = 0;
+let resizeTimeout; 
+var canvas;
 
 function commonSetup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight);
+
+  canvas.position(0, 0);
+  canvas.style('position', 'fixed');
+  canvas.style('top', '0');
+  canvas.style('left', '0');
+  canvas.style('z-index', '-1');
+  canvas.style('pointer-events', 'none');
+
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   textFont('Georgia');
