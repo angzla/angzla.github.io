@@ -3,7 +3,7 @@ let popups = [];
 let isFrozen = false;
 
 function preload() {
-  cat = loadImage('cat.jpg');
+  cat = loadImage('images/cat.jpg');
 }
 
 function setup() {
@@ -68,7 +68,6 @@ function setup() {
         // Coin toss
         if (random() < 0.7) {
           // Text bubble
-          // const input = document.getElementById("koiMessageInput");
           input.style.display = "block";
           input.style.position = "absolute";
           input.style.left = `${mouseX + 10}px`;
