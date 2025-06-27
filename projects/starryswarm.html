@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StarrySwarm</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="../js/koi.js"></script>
+  <script src="../js/pond-other.js"></script>
+  <script src="../js/about.js"></script>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+  <script>
+    fetch('../nav.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('navbar-placeholder').innerHTML = html;
+      });
+  </script>
+</body>
+</html>
