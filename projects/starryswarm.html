@@ -36,6 +36,15 @@
       margin-bottom: 2rem;
       border: none;
     }
+
+    .visual-demo {
+        width: 600px;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1rem auto;
+        }
+
   </style>
 </head>
 <body>
@@ -51,28 +60,36 @@
   <main>
     <h1>StarrySwarm</h1>
     <p>
-      This work explores swarm algorithms that generate art from audio input.
+        This is an art project that connects auditory and visual senses by visualizing how different swarm algorithms respond to live audio and music. 
       I visualize KANTS, PSO, and BOIDS using Processing and compare their
       visual outputs across genres and sounds. 
       In my thesis, I discuss how StarrySwarm, my implementation of BOIDS, was the most dynamic across movement 
       and color and responsive to changes in sound.
     </p>
     <p>
-        StarrySwarm
-        <img src="../images/starryswarm.gif" alt="StarrySwarm">
-        <img src="../images/starryswarm2.gif" alt="StarrySwarm">
-    </p>
+        Swarms: collective intelligent systems with a group of mobile agents that communicate with each other in response to local environment, often towards decision making
+        (Honeybee waggle dances, ant pheromones, bird flocking, yeast, elephant herding, fish schooling.)
+    </p> 
+
+    <h2>StarrySwarm</h2>
     <p>
-        Kants
-        <img src="../images/kants.gif" alt="Kants">
+        BOIDS, birds flocking (Craig Reynold 1965)
+        <img src="../images/starryswarm.gif" alt="StarrySwarm" class="visual-demo">
+        <img src="../images/starryswarm2.gif" alt="StarrySwarm" class="visual-demo">
     </p>
+    <h2>Kants</h2>
     <p>
-        Particle Swarm Optimization
-        <img src="../images/pso.gif" alt="PSO">
+        Ant pheromone clustering algorithm (Fernandes 2008)
+        <img src="../images/kants.gif" alt="Kants" class="visual-demo">
+    </p>
+    <h2>Particle Swarm Optimization</h2>
+    <p>
+        Flocking based optimization algorithm, (Kennedy and Eberhart 1995)
+        <img src="../images/pso.gif" alt="PSO" class="visual-demo">
     </p>
 
     <!-- YouTube Playlist embed -->
-    <h3>Video Gallery</h3>
+    <h2>Video Gallery</h2>
     <iframe width="560" height="315" 
     src="https://www.youtube.com/embed/videoseries?si=WDhqwp2ogSWly3Ps&amp;list=PLsro6Cwvmceuaw9eLh6N0waUc08S1HUG7" 
     title="Video Gallery" frameborder="0" 
@@ -97,7 +114,7 @@
     <h2>Read my thesis here:</h2>
     <p>
         <iframe 
-        src="https://drive.google.com/file/d/1HI5bjpnPcctkYzpv3L9yVeFsn1tz7gLC/view" 
+        src="https://drive.google.com/file/d/1HI5bjpnPcctkYzpv3L9yVeFsn1tz7gLC/preview" 
         width="100%" 
         height="600px"
         style="border: none;"
