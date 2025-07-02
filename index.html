@@ -23,7 +23,7 @@
     <button onclick="freezeFish()" title="Freeze Fish"><i class="fas fa-circle-stop"></i></button>
   </div>  
   <script>
-    fetch('/nav.html')
+    fetch('../nav.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('navbar-placeholder').innerHTML = html;
@@ -40,6 +40,7 @@
         ✩°｡⋆ Drag your mouse to feed the fish some stars ⋆｡°✩<br><br>
         ฅᨐฅ Click on a koi to give it a message but be careful of Miki ฅᨐฅ <br><br>
         Add, remove, reset, or freeze the fish with the buttons above. <br><br>
+        Sometimes the fish need a second to load - try resetting them if they're shy! <br><br>
       </p>
     </div>
   </div>
