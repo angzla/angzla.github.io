@@ -41,7 +41,7 @@
 <body>
   <div id="navbar-placeholder"></div>
   <script>
-    fetch('/nav.html')
+    fetch('../nav.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('navbar-placeholder').innerHTML = html;
